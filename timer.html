@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer</title>
+  <style>
+    body{
+      background-color: #f4f4f4;
+    }
+    .Wrapp-timer{
+      background-color: blue;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color:white;
+      height: 100px;
+      width: 100px;;
+      border-radius: 50px;
+      padding-left: 2px;
+      font-size: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 150px;
+      margin-left: 43%;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      
+    }
+    .seconds,.micro-seconds{
+          margin-left: 3px;
+          margin-right: 3px;
+
+    }
+    .minutes{
+      margin-right: 2px;
+    }
+    .start-timer{
+      display: flex;
+      background-color: orangered;
+      width: 100px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      margin-left: 43%;
+      font-size: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight:bold;
+      color:black;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      border: none;
+
+
+    }
+
+    @media(max-width:500px){
+      .Wrapp-timer{
+        background-color: blueviolet;
+        width: 20%;
+      }
+      .start-timer{
+        background-color: aqua;
+        
+      }
+    }
+    @media(max-width:800){
+      .Wrapp-timer{
+        width: 300px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="Wrapp-timer">
+    <div class="hours js-hours">0</div>
+    <div>:</div>
+    <div class="seconds js-seconds">0</div>
+    <div>:</div>
+    <div class="micro-seconds js-micro-seconds">0</div>
+  </div>
+  <div>
+    <button class="start-timer js-start-timer">start</button> 
+  </div>
+  
+  </body>
+  <script>
+    let start =document.querySelector('.js-start-timer')
+    let microSeconds =document.querySelector('.js-micro-seconds')
+    let microSecondsIntoNumber = parseInt(microSeconds.innerHTML);
+   
+
+    let seconds = document.querySelector('.js-seconds')
+    let secondsIntoNumber = parseInt(seconds.innerHTML);
+
+    let minutes = document.querySelector('.js-hours')
+    let minutesIntoNumber = parseInt(minutes.innerHTML)
+    microSecondsIntoNumber=null;
+    let int1seconds = null;
+    let microint1seconds=null;
+    let minutesint1 = null;
+    start.addEventListener('click',()=>{
+      if(start.innerHTML==='start'){
+        start.innerHTML='stop'
+        
+        
+        // Microseconds tab
+       
+        
+
+   microint1seconds = setInterval(()=>{
+     
+      if(microSecondsIntoNumber<60){
+        microSecondsIntoNumber+=1
+        localStorage.setItem('microSecondsIntoNumber',JSON.stringify(microSecondsIntoNumber));
+        let getmicrosecond=localStorage.getItem('microSecondsIntoNumber')
+        console.log(getmicrosecond);
+        microSeconds.innerHTML = getmicrosecond;
+        
+      }else{
+        microSecondsIntoNumber=0
+        microSeconds.innerHTML=microSecondsIntoNumber;
+      }
+    },60)
+
+    
+
+      // Seconds tab
+
+    secondsIntoNumber=null;
+   int1seconds = setInterval(()=>{
+      if(secondsIntoNumber<60){
+        secondsIntoNumber+=1
+        seconds.innerHTML=secondsIntoNumber;
+      }else{
+        secondsIntoNumber=0;
+        seconds.innerHTML=secondsIntoNumber;
+      }
+      
+
+    },3600)
+
+    // Minutes tab
+
+    minutesIntoNumber= null
+    minutesint1 = setInterval(()=>{
+      if(minutesIntoNumber<60){
+        minutesIntoNumber+=1
+        console.log(minutesIntoNumber);
+        minutes.innerHTML =minutesIntoNumber
+      }else{
+        minutesIntoNumber=0;
+        minutes.innerHTML=minutesIntoNumber;
+      }
+       
+     
+       
+    },60000)
+    
+     
+
+
+      }else{
+      start.innerHTML='start'
+
+      
+      clearInterval(int1seconds);
+
+      clearInterval(microint1seconds);
+      clearInterval(minutesint1);
+      
+       
+      }
+    })
+
+   // clearInterval(secondsIntoNumber)
+   // const person = 'boy'
+    //localStorage.setItem('person',person) ;
+    //const person2=person
+
+    //console.log(person2);
+    //const child='boy';
+   // const age=10;
+
+   // const convert = parseInt(age);
+    //console.log(convert);
+    //JSON.stringify(convert)
+    //localStorage.setItem('child',child);
+
+   // localStorage.setItem('age',JSON.stringify(convert));
+
+   // const getValue = localStorage.getItem('age')
+   // console.log(getValue);
+
+
+ //const array1 = [1,2,3,4].map((number)=>{
+ // if(number%2===0){
+   // return number;
+ // }
+
+// })
+// console.log(array1);
+
+
+
+
+
+     </script>
+</html>
